@@ -14,7 +14,7 @@ switch (args[0]) {
     console.log(`Версия ${version}`);
     process.exit(0);
 
-  case 'undefined':
+  case undefined:
     console.log('Привет пользователь!\n' +
       'Эта программа будет запускать сервер «Кексобукинг».\n' +
       'Автор: Александр Краснов.');
