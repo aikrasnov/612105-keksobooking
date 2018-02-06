@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Александр Краснов](https://up.htmlacademy.ru/nodejs/1/user/612105).
-* Наставник: `Сергей Вохмянин`.
+* Наставник: [Сергей Вохмянин](https://up.htmlacademy.ru/profile/id530823).
 
 ---
 
