@@ -1,24 +1,23 @@
 const args = process.argv.slice(2);
-const version = '0.0.1';
+const VERSION = `0.0.1`;
 
 switch (args[0]) {
-  case '--help':
-  case '-help':
-    console.log('Доступные команды:\n' +
-      '--help    — печатает этот текст;\n' +
-      '--version — печатает версию приложения;');
+  case `--help`:
+  case `-help`:
+    console.log(`Доступные команды:\n--help    — печатает этот текст;\n--version — печатает версию приложения;`);
     process.exit(0);
+    break;
 
-  case '--version':
-  case '-version':
-    console.log(`Версия ${version}`);
+  case `--version`:
+  case `-version`:
+    console.log(`Версия ${VERSION}`);
     process.exit(0);
+    break;
 
   case undefined:
-    console.log('Привет пользователь!\n' +
-      'Эта программа будет запускать сервер «Кексобукинг».\n' +
-      'Автор: Александр Краснов.');
+    console.log(`Привет пользователь!\nЭта программа будет запускать сервер «Кексобукинг».\nАвтор: Александр Краснов.`);
     process.exit(0);
+    break;
 
   default:
     console.error(`Неизвестная команда ${args[0]}. Чтобы прочитать правила использования приложения, наберите "--help"`);
