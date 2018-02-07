@@ -1,7 +1,7 @@
-const ARGS = process.argv.slice(2);
+const args = process.argv.slice(2);
 const VERSION = `0.0.1`;
 
-switch (ARGS[0]) {
+switch (args[0]) {
   case `--help`:
   case `-help`:
     console.log(`Доступные команды:\n--help    — печатает этот текст;\n--version — печатает версию приложения;`);
@@ -20,7 +20,7 @@ switch (ARGS[0]) {
     break;
 
   default:
-    console.error(`Неизвестная команда ${ARGS[0]}. Чтобы прочитать правила использования приложения, наберите "--help"`);
+    console.error(`Неизвестная команда ${args[0]}. Чтобы прочитать правила использования приложения, наберите "--help"`);
     process.exit(1);
 
 }
