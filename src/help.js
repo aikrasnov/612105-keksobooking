@@ -10,6 +10,6 @@ module.exports = {
   name: `help`,
   description: `напечатать хэлп`,
   execute() {
-    console.log(`Доступные команды:\n${COMMANDS}`);
+    console.log(`Доступные команды:\n--help - напечатать хэлп\n${COMMANDS}`);
   }
 };
