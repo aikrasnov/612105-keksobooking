@@ -1,6 +1,6 @@
 module.exports = {
   name: `hello`,
-  description: `Напечатать приветствие`,
+  description: `напечатать приветствие`,
   execute() {
     console.log(`\
 Привет пользователь!
