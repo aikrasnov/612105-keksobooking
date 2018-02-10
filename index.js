@@ -17,7 +17,7 @@ switch (args[0]) {
     console.log(`Версия ${VERSION}`);
     process.exit(0);
     break;
-
+  // eslint-disable-next-line no-undefined
   case undefined:
     console.log(`\
 Привет пользователь!

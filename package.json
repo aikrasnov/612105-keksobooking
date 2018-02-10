@@ -1,0 +1,28 @@
+{
+  "name": "612105-keksobooking",
+  "version": "1.0.0",
+  "description": "* Студент: [Александр Краснов](https://up.htmlacademy.ru/nodejs/1/user/612105). * Наставник: [Сергей Вохмянин](https://up.htmlacademy.ru/profile/id530823).",
+  "main": "index.js",
+  "devDependencies": {
+    "eslint": "4.17.0",
+    "eslint-config-htmlacademy": "0.4.2"
+  },
+  "scripts": {
+    "test:lint": "eslint .",
+    "test": "npm run test:lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aikrasnov/612105-keksobooking.git"
+  },
+  "keywords": [
+    "keks",
+    "htmlacademy"
+  ],
+  "author": "Aleksandr Krasnov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aikrasnov/612105-keksobooking/issues"
+  },
+  "homepage": "https://github.com/aikrasnov/612105-keksobooking#readme"
+}
