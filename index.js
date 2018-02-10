@@ -1,36 +1,33 @@
+const author = require(`./src/author`);
+const description = require(`./src/description`);
+const error = require(`./src/error`);
+const hello = require(`./src/hello`);
+const help = require(`./src/help`);
+const license = require(`./src/license`);
+const version = require(`./src/version`);
+
+const COMMANDS = [author, description, hello, help, license, version];
 const args = process.argv.slice(2);
-const VERSION = `0.0.1`;
 
-switch (args[0]) {
-  case `--help`:
-  case `-help`:
-    console.log(`\
-Доступные команды:
---help — печатает этот текст;
---version — печатает версию приложения;\
-`);
-    process.exit(0);
-    break;
+for (const command of COMMANDS) {
 
-  case `--version`:
-  case `-version`:
-    console.log(`Версия ${VERSION}`);
-    process.exit(0);
-    break;
-  // eslint-disable-next-line no-undefined
-  case undefined:
-    console.log(`\
-Привет пользователь!
-Эта программа будет запускать сервер «Кексобукинг».
-Автор: Александр Краснов.\
-`);
-    process.exit(0);
-    break;
+  try {
 
-  default:
-    console.error(`\
-Неизвестная команда ${args[0]}. Чтобы прочитать правила использования приложения, наберите "--help"\
-`);
-    process.exit(1);
+    // если не получилось нормализовать аргумент, значит ничего не передано
+    if (command.name === args[0].replace(/-/g, ``)) {
+      command.execute();
+      process.exit(0);
+    }
+
+  } catch (err) {
+
+    // если ничего не переданно выводим приветствие
+    hello.execute();
+    process.exit(0);
+
+  }
+
 
 }
+
+error.execute(args[0]);
