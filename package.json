@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/aikrasnov/612105-keksobooking/issues"
   },
-  "homepage": "https://github.com/aikrasnov/612105-keksobooking#readme"
+  "homepage": "https://github.com/aikrasnov/612105-keksobooking#readme",
+  "dependencies": {
+    "colors": "1.1.2"
+  }
 }

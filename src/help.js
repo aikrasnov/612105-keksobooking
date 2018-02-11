@@ -3,13 +3,14 @@ const description = require(`./description`);
 const hello = require(`./hello`);
 const license = require(`./license`);
 const version = require(`./version`);
+require(`colors`);
 
-const COMMANDS = [author, description, hello, license, version].map((cmd) => `--${cmd.name} - ${cmd.description}`).join(`\n`);
+const COMMANDS = [author, description, hello, license, version].map((cmd) => `${`--`.grey}${cmd.name.grey} - ${cmd.description.green}`).join(`\n`);
 
 module.exports = {
   name: `help`,
   description: `напечатать хэлп`,
   execute() {
-    console.log(`Доступные команды:\n--help - напечатать хэлп\n${COMMANDS}`);
+    console.log(`Доступные команды:\n${`--`.grey}${this.name.grey} - ${this.description.green}\n${COMMANDS}`);
   }
 };
