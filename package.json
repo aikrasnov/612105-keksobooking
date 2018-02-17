@@ -4,6 +4,7 @@
   "description": "* Студент: [Александр Краснов](https://up.htmlacademy.ru/nodejs/1/user/612105). * Наставник: [Сергей Вохмянин](https://up.htmlacademy.ru/profile/id530823).",
   "main": "index.js",
   "devDependencies": {
+    "chai": "4.1.2",
     "eslint": "4.17.0",
     "eslint-config-htmlacademy": "0.4.2",
     "mocha": "5.0.1"
