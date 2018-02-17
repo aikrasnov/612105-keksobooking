@@ -4,12 +4,14 @@ const {expect} = require(`chai`);
 describe(`generateEntity function`, () => {
 
   let result;
-  const photos = [`http://o0.github.io/assets/images/tokyo/hotel1.jpg`, `http://o0.github.io/assets/images/tokyo/hotel2.jpg`, `http://o0.github.io/assets/images/tokyo/hotel3.jpg`];
-  const featureTypes = [`wifi`, `dishwasher`, `parking`, `washer`, `elevator`, `conditioner`];
-  const checkins = [`12:00`, `13:00`, `14:00`];
-  const checkouts = [`12:00`, `13:00`, `14:00`];
-  const titles = [`Большая уютная квартира`, `Маленькая неуютная квартира`, `Огромный прекрасный дворец`, `Маленький ужасный дворец`, `Красивый гостевой домик`, `Некрасивый негостеприимный домик`, `Уютное бунгало далеко от моря`, `Неуютное бунгало по колено в воде`];
-  const types = [`flat`, `palace`, `house`, `bungalo`];
+  const DATA = {
+    photos: [`http://o0.github.io/assets/images/tokyo/hotel1.jpg`, `http://o0.github.io/assets/images/tokyo/hotel2.jpg`, `http://o0.github.io/assets/images/tokyo/hotel3.jpg`],
+    features: [`wifi`, `dishwasher`, `parking`, `washer`, `elevator`, `conditioner`],
+    checkins: [`12:00`, `13:00`, `14:00`],
+    checkouts: [`12:00`, `13:00`, `14:00`],
+    types: [`flat`, `palace`, `house`, `bungalo`],
+    titles: [`Большая уютная квартира`, `Маленькая неуютная квартира`, `Огромный прекрасный дворец`, `Маленький ужасный дворец`, `Красивый гостевой домик`, `Некрасивый негостеприимный домик`, `Уютное бунгало далеко от моря`, `Неуютное бунгало по колено в воде`]
+  };
 
   it(`result should be object`, () => {
     result = generateEntity();
@@ -47,7 +49,7 @@ describe(`generateEntity function`, () => {
     });
 
     it(`offer should have title`, () => {
-      expect(result.offer.title).to.be.oneOf(titles);
+      expect(result.offer.title).to.be.oneOf(DATA.titles);
     });
 
     it(`offer should have address`, () => {
@@ -57,7 +59,7 @@ describe(`generateEntity function`, () => {
     });
 
     it(`offer should have type`, () => {
-      expect(result.offer.type).to.be.oneOf(types);
+      expect(result.offer.type).to.be.oneOf(DATA.types);
     });
 
     it(`offer should have rooms`, () => {
@@ -69,11 +71,11 @@ describe(`generateEntity function`, () => {
     });
 
     it(`offer should have checkin`, () => {
-      expect(result.offer.checkin).to.be.oneOf(checkins);
+      expect(result.offer.checkin).to.be.oneOf(DATA.checkins);
     });
 
     it(`offer should have checkout`, () => {
-      expect(result.offer.checkout).to.be.oneOf(checkouts);
+      expect(result.offer.checkout).to.be.oneOf(DATA.checkouts);
     });
 
     it(`offer should have features`, () => {
@@ -82,7 +84,7 @@ describe(`generateEntity function`, () => {
 
     it(`each feature should be one of`, () => {
       for (const feature of result.offer.features) {
-        expect(feature).to.be.oneOf(featureTypes);
+        expect(feature).to.be.oneOf(DATA.features);
       }
     });
 
@@ -99,7 +101,7 @@ describe(`generateEntity function`, () => {
     });
 
     it(`each photo should be link`, () => {
-      expect(result.offer.photos.sort()).to.be.eql(photos.sort());
+      expect(result.offer.photos.sort()).to.be.eql(DATA.photos.sort());
     });
   });
 });
