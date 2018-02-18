@@ -79,17 +79,17 @@ describe(`generateEntity function`, () => {
     });
 
     it(`offer should have features`, () => {
-      expect(result.offer.FEATURES).to.be.an.instanceof(Array);
+      expect(result.offer.features).to.be.an.instanceof(Array);
     });
 
     it(`each feature should be one of`, () => {
-      for (const feature of result.offer.FEATURES) {
+      for (const feature of result.offer.features) {
         expect(feature).to.be.oneOf(DATA.FEATURES);
       }
     });
 
     it(`each feature should be unique`, () => {
-      expect(result.offer.FEATURES.length).to.be.equal(new Set(result.offer.FEATURES).size);
+      expect(result.offer.features.length).to.be.equal(new Set(result.offer.features).size);
     });
 
     it(`offer should have description`, () => {
@@ -97,11 +97,11 @@ describe(`generateEntity function`, () => {
     });
 
     it(`offer should have photos`, () => {
-      expect(result.offer.PHOTOS).to.be.an.instanceof(Array);
+      expect(result.offer.photos).to.be.an.instanceof(Array);
     });
 
     it(`each photo should be link`, () => {
-      expect(result.offer.PHOTOS.sort()).to.be.eql(DATA.PHOTOS.sort());
+      expect(result.offer.photos.sort()).to.be.eql(DATA.PHOTOS.sort());
     });
   });
 });

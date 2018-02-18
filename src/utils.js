@@ -13,8 +13,7 @@ const randomString = (length) => {
   return text;
 };
 
-// promisify из utils не помог. При вызове questionAsync TypeError: Cannot read property '_questionCallback' of undefined
-const questionAsync = (query, rl) => {
+const askQuestion = (rl, query) => {
   return new Promise((resolve) => {
     rl.question(query, (answer) => resolve(answer));
   });
@@ -26,17 +25,17 @@ const questionAsync = (query, rl) => {
  * @param {Object} rl
  * @param {String} question строка вопроса
  * @param {String} message сообщение которое нужно вывести, если ввод был не правильный
- * @param {Function} callback функция для проверки ответа на корректность
+ * @param {Function} checkFunction функция для проверки ответа на корректность
  * @return {Promise<*>}
  */
-const repeatQuestion = async (rl, question, message, callback) => {
-  let answer = await questionAsync(question, rl);
+const repeatQuestion = async (rl, question, message, checkFunction) => {
+  let answer = await askQuestion(rl, question);
 
-  if (typeof callback !== `function`) {
-    throw new Error(`Callback must be a function!`);
+  if (typeof checkFunction !== `function`) {
+    throw new Error(`last arg must be a function!`);
   }
 
-  if (callback(answer)) {
+  if (checkFunction(answer)) {
 
     console.log(`OK`.green);
     return answer;
@@ -47,12 +46,12 @@ const repeatQuestion = async (rl, question, message, callback) => {
       console.log(message.red);
     }
 
-    return repeatQuestion(rl, question, message, callback);
+    return repeatQuestion(rl, question, message, checkFunction);
   }
 };
 
 module.exports = {
-  questionAsync,
+  askQuestion,
   randomNumber,
   randomString,
   repeatQuestion

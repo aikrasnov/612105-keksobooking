@@ -31,9 +31,9 @@ const generateEntity = () => {
     guests: randomNumber(0, 99),
     checkin: DATA.CHECKINS[randomNumber(0, DATA.CHECKINS.length - 1)],
     checkout: DATA.CHECKOUTS[randomNumber(0, DATA.CHECKOUTS.length - 1)],
-    FEATURES: DATA.FEATURES.slice(0, randomNumber(1, DATA.FEATURES.length - 1)),
+    features: DATA.FEATURES.slice(0, randomNumber(1, DATA.FEATURES.length - 1)),
     description: ``,
-    PHOTOS: DATA.PHOTOS.sort(() => randomNumber(0, 1))
+    photos: DATA.PHOTOS.sort(() => randomNumber(0, 1))
   };
 
   return {
