@@ -26,7 +26,6 @@ module.exports = {
 Автор: Александр Краснов.\n\
 `.green);
 
-
     const ask = async () => {
 
       const yes = /^yes$|^да$/;
