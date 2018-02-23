@@ -1,13 +1,7 @@
-const {generateEntity} = require(`./generateEntity`);
-const {askQuestion, repeatQuestion} = require(`./utils`);
-const {promisify} = require(`util`);
-const fs = require(`fs`);
+const {generateEntity} = require(`../generateEntity`);
+const {askQuestion, repeatQuestion, writeFile, exists} = require(`../utils`);
 const readline = require(`readline`);
-
 require(`colors`);
-
-const writeFile = promisify(fs.writeFile);
-const exists = promisify(fs.exists);
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -76,6 +70,7 @@ module.exports = {
     try {
       await ask();
       rl.close();
+      process.exit(0);
     } catch (error) {
       console.log(`Что-то пошло не так!`.red);
       console.error(error);

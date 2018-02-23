@@ -1,4 +1,11 @@
 require(`colors`);
+const fs = require(`fs`);
+const {promisify} = require(`util`);
+
+
+const writeFile = promisify(fs.writeFile);
+const readFile = promisify(fs.readFile);
+const exists = promisify(fs.exists);
 
 const randomNumber = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -54,5 +61,8 @@ module.exports = {
   askQuestion,
   randomNumber,
   randomString,
-  repeatQuestion
+  repeatQuestion,
+  readFile,
+  writeFile,
+  exists
 };
