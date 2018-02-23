@@ -1,6 +1,7 @@
 const http = require(`http`);
 const url = require(`url`);
 const path = require(`path`);
+const {FILE_TYPES} = require(`../constants`);
 const {readFile} = require(`../utils`);
 
 const run = (args) => {
@@ -17,25 +18,30 @@ const run = (args) => {
   const server = http.createServer((req, res) => {
     const {pathname} = url.parse(req.url);
 
-    const FILE_TYPES = {
-      'css': `text/css`,
-      'html': `text/html; charset=UTF-8`,
-      'jpg': `image/jpeg`,
-      'png': `image/png`,
-      'ico': `image/x-icon`
-    };
-
     (async () => {
       const resource = `./static${pathname}`;
       let fileType = path.extname(resource).replace(/^\./, ``);
 
-      if (pathname === `/`) {
-        res.setHeader(`content-type`, FILE_TYPES.html);
-        res.end(await readFile(`./static/index.html`));
-      } else {
-        res.setHeader(`content-type`, FILE_TYPES[fileType]);
-        const file = await readFile(resource);
-        res.end(file);
+      try {
+
+        if (pathname === `/`) {
+          res.setHeader(`content-type`, FILE_TYPES.html);
+          res.end(await readFile(`./static/index.html`));
+        } else {
+          res.setHeader(`content-type`, FILE_TYPES[fileType] || `text/plain`);
+          const file = await readFile(resource);
+          res.end(file);
+        }
+
+      } catch (err) {
+
+        if (err.code === `ENOENT`) {
+          res.statusCode = 404;
+          res.end(`Not Found`);
+        } else {
+          throw err;
+        }
+
       }
     })().catch((err) => {
       console.error(err);
