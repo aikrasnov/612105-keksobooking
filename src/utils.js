@@ -7,10 +7,21 @@ const writeFile = promisify(fs.writeFile);
 const readFile = promisify(fs.readFile);
 const exists = promisify(fs.exists);
 
+/**
+ * Сгенерировать случайное число
+ * @param {Number} min
+ * @param {Number} max
+ * @return {Number}
+ */
 const randomNumber = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
+/**
+ * Сгенерировать рандомную строку
+ * @param {Number} length длина строки
+ * @return {string}
+ */
 const randomString = (length) => {
   let text = ``;
   let alphabet = `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789`;
@@ -20,6 +31,12 @@ const randomString = (length) => {
   return text;
 };
 
+/**
+ * Напечатать вопрос, прочитать ответ
+ * @param {Object} rl
+ * @param {String} query
+ * @return {Promise<any>}
+ */
 const askQuestion = (rl, query) => {
   return new Promise((resolve) => {
     rl.question(query, (answer) => resolve(answer));

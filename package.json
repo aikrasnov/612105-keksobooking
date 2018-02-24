@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/aikrasnov/612105-keksobooking#readme",
   "dependencies": {
-    "colors": "1.1.2"
+    "colors": "1.1.2",
+    "express": "4.16.2"
   }
 }

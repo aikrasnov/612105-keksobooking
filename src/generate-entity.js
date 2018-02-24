@@ -1,5 +1,9 @@
 const {randomNumber, randomString} = require(`./utils`);
 
+/**
+ * Сгенерировать сущность для кекбукинга
+ * @return {{author: {avatar: string}, offer: {title: string, address: string, price: *, type: string, rooms: *, guests: *, checkin: string, checkout: string, features: string[], description: string, photos: string[]}, location: {x: *, y: *}}}
+ */
 const generateEntity = () => {
 
   const length = randomNumber(0, 999);

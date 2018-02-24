@@ -6,6 +6,9 @@ const FILE_TYPES = {
   'ico': `image/x-icon`
 };
 
+const PROHIBITED = /=/;
+
 module.exports = {
-  FILE_TYPES
+  FILE_TYPES,
+  PROHIBITED
 };

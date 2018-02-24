@@ -1,4 +1,4 @@
-const {generateEntity} = require(`../src/generateEntity`);
+const {generateEntity} = require(`../src/generate-entity`);
 const {expect} = require(`chai`);
 
 describe(`generateEntity function`, () => {
