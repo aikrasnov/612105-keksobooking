@@ -43,7 +43,8 @@ const generateEntity = () => {
   return {
     author,
     offer,
-    location
+    location,
+    date: Date.now()
   };
 
 };
