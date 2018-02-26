@@ -50,6 +50,7 @@ offersRoute.get(`/offers/:date`, (req, res) => {
       if (date === String(el.date)) {
         res.status(200);
         res.send(el);
+        return;
       }
     }
   }
