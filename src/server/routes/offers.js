@@ -5,8 +5,6 @@ const {Router} = require(`express`);
 const offersRoute = new Router();
 
 offersRoute.get(`/offers`, (req, res) => {
-  res.setHeader(`content-type`, `application/json; charset=utf-8`);
-
   const limit = Number(req.query.limit) || 20;
   const skip = Number(req.query.skip);
 
@@ -39,15 +37,13 @@ offersRoute.post(`/offers`, (req, res) => {
 });
 
 offersRoute.get(`/offers/:date`, (req, res) => {
-
-  res.setHeader(`content-type`, `application/json; charset=utf-8`);
   const allEntity = store.getAll();
   const {date} = req.params;
 
   if (allEntity.length !== 0) {
 
     for (const el of allEntity) {
-      if (date === String(el.date)) {
+      if (date === el.date) {
         res.status(200);
         res.send(el);
         return;
@@ -59,6 +55,10 @@ offersRoute.get(`/offers/:date`, (req, res) => {
   res.status(404);
   res.send({message: `offer with date "${date}" not found`});
 
+});
+
+offersRoute.all(`/offers`, (req, res) => {
+  res.status(501).send({message: `method not implemented`});
 });
 
 module.exports = {

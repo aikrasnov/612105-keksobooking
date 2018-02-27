@@ -20,6 +20,20 @@ describe(`POST /api/offers`, () => {
     assert(res.headers[`content-type`] === `application/json; charset=utf-8`);
   });
 
+  it(`should have content-length`, () => {
+    assert(res.headers[`content-length`]);
+  });
+
+
+});
+
+describe(`PATCH /api/offers`, () => {
+
+  it(`should have code 501`, async () => {
+    const res = await request(app).patch(`/api/offers/`);
+
+    assert(res.statusCode = 501);
+  });
 });
 
 describe(`GET /api/offers`, () => {
@@ -34,6 +48,10 @@ describe(`GET /api/offers`, () => {
 
   it(`should have content-type`, () => {
     assert(res.headers[`content-type`] === `application/json; charset=utf-8`);
+  });
+
+  it(`should have content-length`, () => {
+    assert(res.headers[`content-length`]);
   });
 
   it(`should have data`, () => {
@@ -55,6 +73,10 @@ describe(`GET /api/offers/:date`, () => {
 
     it(`should have content-type`, () => {
       assert(res.headers[`content-type`] === `application/json; charset=utf-8`);
+    });
+
+    it(`should have content-length`, () => {
+      assert(res.headers[`content-length`]);
     });
 
     it(`should have answer with requested date`, () => {
