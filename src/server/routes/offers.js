@@ -6,59 +6,40 @@ const offersRoute = new Router();
 
 offersRoute.get(`/offers`, (req, res) => {
   const limit = Number(req.query.limit) || 20;
-  const skip = Number(req.query.skip);
+  const skip = Number(req.query.skip) || 0;
 
-  const allEntity = store.getAll();
-  let result = [];
-
-  for (let i = 0; i < limit; i++) {
-
-    if (allEntity[i]) {
-      result.push(allEntity[i]);
-    }
-  }
-
-  if (skip) {
-    result = result.slice(skip);
-  }
-
-  res.status(200);
-  res.send(result);
+  res.send(store.getAll().slice(skip, skip + limit));
 });
 
 offersRoute.post(`/offers`, (req, res) => {
-  res.setHeader(`content-type`, `application/json; charset=utf-8`);
   // случайный ключ для кэша
   const key = `${Date.now()}_${randomNumber(1, 999999)}`;
 
   store.put(key, req.body);
-  res.status(200);
-  res.send();
+  res.send(req.body);
 });
 
 offersRoute.get(`/offers/:date`, (req, res) => {
   const allEntity = store.getAll();
   const {date} = req.params;
+  let entity;
 
-  if (allEntity.length !== 0) {
+  entity = allEntity.find((el) => {
+    return el.date === date;
+  });
 
-    for (const el of allEntity) {
-      if (date === el.date) {
-        res.status(200);
-        res.send(el);
-        return;
-      }
-    }
+  if (entity) {
+    res.send(entity);
+    return;
   }
 
-
   res.status(404);
-  res.send({message: `offer with date "${date}" not found`});
+  res.send({error: `Not Found`, errorMessages: `offer with date "${date}" not found`});
 
 });
 
 offersRoute.all(`/offers`, (req, res) => {
-  res.status(501).send({message: `method not implemented`});
+  res.status(501).send({error: `Internal Error`, errorMessages: `Method not implemented`});
 });
 
 module.exports = {

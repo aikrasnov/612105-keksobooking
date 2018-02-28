@@ -13,12 +13,7 @@ class Store {
   }
 
   getAll() {
-    const result = [];
-    for (const key of Object.keys(this._store)) {
-      result.push(this._store[key]);
-    }
-
-    return result;
+    return Object.values(this._store);
   }
 }
 
