@@ -1,5 +1,7 @@
-const {randomNumber} = require(`../../utils`);
-const {store} = require(`../../memory-store`);
+const {randomNumber} = require(`../../../utils`);
+const {store} = require(`../../../memory-store`);
+const {OFFERS_SCHEME} = require(`./scheme/offers`);
+const {validator} = require(`../../middleware/validator`);
 const {Router} = require(`express`);
 
 const offersRoute = new Router();
@@ -11,7 +13,7 @@ offersRoute.get(`/offers`, (req, res) => {
   res.send(store.getAll().slice(skip, skip + limit));
 });
 
-offersRoute.post(`/offers`, (req, res) => {
+offersRoute.post(`/offers`, validator(OFFERS_SCHEME), (req, res) => {
   // случайный ключ для кэша
   const key = `${Date.now()}_${randomNumber(1, 999999)}`;
 
@@ -33,9 +35,7 @@ offersRoute.get(`/offers/:date`, (req, res) => {
     return;
   }
 
-  res.status(404);
-  res.send({error: `Not Found`, errorMessages: `offer with date "${date}" not found`});
-
+  res.status(404).send({error: `Not Found`, errorMessages: `offer with date "${date}" not found`});
 });
 
 offersRoute.all(`/offers`, (req, res) => {

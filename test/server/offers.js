@@ -5,6 +5,7 @@ const {generateEntity} = require(`../../src/generate-entity`);
 
 const app = create();
 const data = generateEntity();
+console.log(JSON.stringify(data));
 
 describe(`POST /api/offers`, () => {
 

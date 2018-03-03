@@ -1,17 +1,10 @@
 const {generateEntity} = require(`../src/generate-entity`);
+const {DATA} = require(`../src/constants`);
 const {expect} = require(`chai`);
 
 describe(`generateEntity function`, () => {
 
   let result;
-  const DATA = {
-    PHOTOS: [`http://o0.github.io/assets/images/tokyo/hotel1.jpg`, `http://o0.github.io/assets/images/tokyo/hotel2.jpg`, `http://o0.github.io/assets/images/tokyo/hotel3.jpg`],
-    FEATURES: [`wifi`, `dishwasher`, `parking`, `washer`, `elevator`, `conditioner`],
-    CHECKINS: [`12:00`, `13:00`, `14:00`],
-    CHECKOUTS: [`12:00`, `13:00`, `14:00`],
-    TYPES: [`flat`, `palace`, `house`, `bungalo`],
-    TITLES: [`Большая уютная квартира`, `Маленькая неуютная квартира`, `Огромный прекрасный дворец`, `Маленький ужасный дворец`, `Красивый гостевой домик`, `Некрасивый негостеприимный домик`, `Уютное бунгало далеко от моря`, `Неуютное бунгало по колено в воде`]
-  };
 
   it(`result should be object`, () => {
     result = generateEntity();
@@ -27,6 +20,10 @@ describe(`generateEntity function`, () => {
 
     it(`author should have avatar`, () => {
       expect(result.author.avatar).to.match(/^https:\/\/robohash.org\/\w+$/);
+    });
+
+    it(`author should name`, () => {
+      expect(result.author.name).to.oneOf(DATA.NAMES);
     });
 
   });
@@ -50,6 +47,10 @@ describe(`generateEntity function`, () => {
 
     it(`offer should have title`, () => {
       expect(result.offer.title).to.be.oneOf(DATA.TITLES);
+    });
+
+    it(`title should have length between 30 and 140`, () => {
+      expect(result.offer.title.length).to.be.within(30, 140);
     });
 
     it(`offer should have address`, () => {

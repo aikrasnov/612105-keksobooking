@@ -1,4 +1,5 @@
 const {randomNumber, randomString} = require(`./utils`);
+const {DATA} = require(`./constants`);
 
 /**
  * Сгенерировать сущность для кекбукинга
@@ -8,17 +9,10 @@ const generateEntity = () => {
 
   const length = randomNumber(0, 999);
   const string = randomString(length);
-  const DATA = {
-    PHOTOS: [`http://o0.github.io/assets/images/tokyo/hotel1.jpg`, `http://o0.github.io/assets/images/tokyo/hotel2.jpg`, `http://o0.github.io/assets/images/tokyo/hotel3.jpg`],
-    FEATURES: [`wifi`, `dishwasher`, `parking`, `washer`, `elevator`, `conditioner`],
-    CHECKINS: [`12:00`, `13:00`, `14:00`],
-    CHECKOUTS: [`12:00`, `13:00`, `14:00`],
-    TYPES: [`flat`, `palace`, `house`, `bungalo`],
-    TITLES: [`Большая уютная квартира`, `Маленькая неуютная квартира`, `Огромный прекрасный дворец`, `Маленький ужасный дворец`, `Красивый гостевой домик`, `Некрасивый негостеприимный домик`, `Уютное бунгало далеко от моря`, `Неуютное бунгало по колено в воде`]
-  };
 
   const author = {
-    avatar: `https://robohash.org/${string}`
+    avatar: `https://robohash.org/${string}`,
+    name: DATA.NAMES[randomNumber(0, DATA.NAMES.length - 1)]
   };
 
   const location = {
@@ -29,7 +23,7 @@ const generateEntity = () => {
   const offer = {
     title: DATA.TITLES[randomNumber(0, DATA.TITLES.length - 1)],
     address: `${location.x}, ${location.y}`,
-    price: randomNumber(1000, 1000000),
+    price: randomNumber(1000, 100000),
     type: DATA.TYPES[randomNumber(0, DATA.TYPES.length - 1)],
     rooms: randomNumber(1, 5),
     guests: randomNumber(0, 99),
