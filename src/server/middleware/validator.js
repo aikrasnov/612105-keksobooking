@@ -26,7 +26,7 @@ const validator = (scheme) => {
 
 
       // Проверяем обязательность поля
-      if (!property && field.required) {
+      if (typeof property === `undefined` && field.required) {
         errors.push({
           error: `Validation Error`,
           fieldName: field.name,
@@ -37,24 +37,32 @@ const validator = (scheme) => {
         return errors;
 
         // если поля нет, и оно не обязательное просто выходим
-      } else if (!property) {
+      } else if (typeof property === `undefined`) {
         return errors;
 
       }
 
       // проверяем тип поля
-      if (field.type && (typeof property !== field.type) && (field.type === `array` && !Array.isArray(property))) {
+      if (field.type && typeof property !== field.type) {
 
-        console.log((typeof property !== field.type), (field.type === `array` && !Array.isArray(property)));
+        if (field.type !== `array`) {
+          errors.push({
+            error: `Validation Error`,
+            fieldName: field.name,
+            errorMessages: `'${field.name}' should have type '${field.type}'`
+          });
 
-        errors.push({
-          error: `Validation Error`,
-          fieldName: field.name,
-          errorMessages: `'${field.name}' should have type '${field.type}'`
-        });
+          return errors;
+        } else if (!Array.isArray(property)) {
+          errors.push({
+            error: `Validation Error`,
+            fieldName: field.name,
+            errorMessages: `'${field.name}' should have type '${field.type}'`
+          });
 
-        // у поля неправильный тип больше не проверяем ничего
-        return errors;
+          // у поля неправильный тип больше не проверяем ничего
+          return errors;
+        }
       }
 
       // проверяем поле на пустоту
@@ -145,7 +153,7 @@ const validator = (scheme) => {
           errors.push({
             error: `Validation Error`,
             fieldName: field.name,
-            errorMessages: `'${property}' should have maximum length '${field.maximum}'`
+            errorMessages: `'${property}' should have maximum value '${field.maximum}'`
           });
 
           return errors;
@@ -166,7 +174,7 @@ const validator = (scheme) => {
           errors.push({
             error: `Validation Error`,
             fieldName: field.name,
-            errorMessages: `'${property}' should have minimum length '${field.minimum}'`
+            errorMessages: `'${property}' should have minimum value '${field.minimum}'`
           });
 
           return errors;

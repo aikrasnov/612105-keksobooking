@@ -50,6 +50,7 @@ describe(`generateEntity function`, () => {
     });
 
     it(`title should have length between 30 and 140`, () => {
+      console.log(result.offer.title);
       expect(result.offer.title.length).to.be.within(30, 140);
     });
 

@@ -2,10 +2,10 @@ const request = require(`supertest`);
 const {assert} = require(`chai`);
 const {create} = require(`../../src/server/server`);
 const {generateEntity} = require(`../../src/generate-entity`);
+const {INVALID_DATA, VALIDATE_ERRORS} = require(`../../src/constants`);
 
 const app = create();
 const data = generateEntity();
-console.log(JSON.stringify(data));
 
 describe(`POST /api/offers`, () => {
 
@@ -23,6 +23,23 @@ describe(`POST /api/offers`, () => {
 
   it(`should have content-length`, () => {
     assert(res.headers[`content-length`]);
+  });
+
+
+});
+
+describe(`POST /api/offers/ validation`, () => {
+
+  let res;
+
+  it(`should have answer`, async () => {
+    res = await request(app).post(`/api/offers`).send(INVALID_DATA);
+
+    assert(res.statusCode === 400);
+  });
+
+  it(`should have collection of validation error`, () => {
+    assert.deepEqual(res.body, VALIDATE_ERRORS);
   });
 
 
