@@ -17,6 +17,20 @@ describe(`tests for offer route (only GET)`, () => {
 
     let res;
 
+    it(`should create offer`, async () => {
+      res = await request(app).post(`/api/offers/`)
+          .field(`title`, `lolololollolololollolololollolololollolololollolololollol`)
+          .field(`address`, `123, 123`)
+          .field(`type`, `bungalo`)
+          .field(`price`, 100)
+          .field(`checkin`, `12:00`)
+          .field(`checkout`, `12:00`)
+          .field(`rooms`, 1)
+          .field(`date`, 123);
+
+      assert(res.statusCode === 200);
+    });
+
     it(`should have answer`, async () => {
       res = await request(app).get(`/api/offers/`);
 
