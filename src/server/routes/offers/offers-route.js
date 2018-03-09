@@ -1,6 +1,5 @@
 const {offersCollection} = require(`../../../database/offers-collection`);
 const {imageCollection} = require(`../../../database/image-store`);
-// const {store} = require(`../../../memory-store`);
 const {OFFERS_SCHEME} = require(`./scheme/offers-scheme`);
 const {validator} = require(`../../middleware/validator`);
 const {Router} = require(`express`);
