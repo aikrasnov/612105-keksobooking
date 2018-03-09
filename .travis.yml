@@ -10,4 +10,4 @@ services:
   - mongodb
 
 before_install:
-  - npm run mongo
+  - mkdir ./db && npm run mongo
