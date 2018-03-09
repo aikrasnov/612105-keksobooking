@@ -27,7 +27,7 @@ const create = () => {
 
 const run = (port) => {
 
-  const app = create();
+  const {app} = create();
   app.listen(port, () => {
     console.log(`run server on ${port}`);
   });

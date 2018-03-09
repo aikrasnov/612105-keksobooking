@@ -1,6 +1,6 @@
 const {Adapter} = require(`./adapter`);
 
-class ImageCollection extends Adapter {
+class ImageBacket extends Adapter {
   constructor() {
     super();
   }
@@ -14,17 +14,17 @@ class ImageCollection extends Adapter {
   }
 }
 
-let imageCollection = new ImageCollection();
-imageCollection.setupImages(`keksbooking`)
+let imageBacket = new ImageBacket();
+imageBacket.setupImages(`keksbooking`)
     .then(() => {
-      console.log(`Image collection is OK!`);
+      console.log(`Image backet is OK!`);
     })
     .catch((err) => {
-      console.error(`Can't setup image collection!`);
+      console.error(`Can't setup image backet!`);
       console.error(err);
       process.exit(1);
     });
 
 module.exports = {
-  imageCollection
+  imageBacket
 };

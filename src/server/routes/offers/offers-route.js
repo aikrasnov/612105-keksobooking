@@ -1,5 +1,5 @@
 const {offersCollection} = require(`../../../database/offers-collection`);
-const {imageCollection} = require(`../../../database/image-store`);
+const {imageBacket} = require(`../../../database/image-store`);
 const {OFFERS_SCHEME} = require(`./scheme/offers-scheme`);
 const {validator} = require(`../../middleware/validator`);
 const {Router} = require(`express`);
@@ -25,7 +25,7 @@ offersRoute.post(`/offers`, upload.single(`avatar`), validator(OFFERS_SCHEME), a
 
   const avatar = req.file;
   if (avatar) {
-    const writableStream = await imageCollection.backet.openUploadStream(avatarId);
+    const writableStream = await imageBacket.backet.openUploadStream(avatarId);
     const stream = new Duplex();
     stream.push(avatar.buffer);
     stream.push(null);
@@ -55,13 +55,13 @@ offersRoute.get(`/offers/:date/avatar`, asyncHandler(async (req, res) => {
     return;
   }
 
-  const images = await imageCollection.backet.find({filename: entity._id}).toArray();
+  const images = await imageBacket.backet.find({filename: entity._id}).toArray();
   if (images.length === 0) {
     res.status(404).send({error: `Not Found`, errorMessages: `offer doesn't have an avatar`});
     return;
   }
 
-  await imageCollection.backet.openDownloadStreamByName(entity._id).pipe(res);
+  await imageBacket.backet.openDownloadStreamByName(entity._id).pipe(res);
 }));
 
 offersRoute.all(`/offers`, (req, res) => {
@@ -71,9 +71,9 @@ offersRoute.all(`/offers`, (req, res) => {
 const changeOffersDatabase = async (database) => {
 
   await offersCollection.terminate();
-  await imageCollection.terminate();
+  await imageBacket.terminate();
   return Promise.all([
-    imageCollection.setupImages(database),
+    imageBacket.setupImages(database),
     offersCollection.setupOffers(database)
   ]);
 };
