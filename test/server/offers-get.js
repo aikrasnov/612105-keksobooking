@@ -13,11 +13,14 @@ describe(`tests for offer route (only GET)`, () => {
     return changeOffersDatabase(`test`);
   });
 
+  const date = Date.now();
+
   describe(`GET /api/offers`, () => {
 
     let res;
 
     it(`should create offer`, async () => {
+
       res = await request(app).post(`/api/offers/`)
           .field(`title`, `lolololollolololollolololollolololollolololollolololollol`)
           .field(`address`, `123, 123`)
@@ -26,9 +29,12 @@ describe(`tests for offer route (only GET)`, () => {
           .field(`checkin`, `12:00`)
           .field(`checkout`, `12:00`)
           .field(`rooms`, 1)
-          .field(`date`, 123)
+          .field(`date`, date)
           .attach(`avatar`, `test/server/images/avatar`);
 
+      await new Promise((resolve) => {
+        setTimeout(resolve, 10 * 1000);
+      });
       assert(res.statusCode === 200);
     });
 
@@ -58,7 +64,7 @@ describe(`tests for offer route (only GET)`, () => {
 
     describe(`date exist`, () => {
       it(`should have answer`, async () => {
-        res = await request(app).get(`/api/offers/123`);
+        res = await request(app).get(`/api/offers/${date}`);
 
         assert(res.statusCode === 200);
       });
@@ -72,7 +78,7 @@ describe(`tests for offer route (only GET)`, () => {
       });
 
       it(`should have answer with requested date`, () => {
-        assert(res.body.date === `123`);
+        assert((res.body.date) === String(date));
       });
     });
 
@@ -94,23 +100,10 @@ describe(`tests for offer route (only GET)`, () => {
       let res;
 
       it(`should have answer`, async () => {
-        res = await request(app).get(`/api/offers/123/avatar`);
+        res = await request(app).get(`/api/offers/${date}/avatar`);
 
-        console.log(res);
         assert(res.statusCode === 200);
       });
-      //
-      // it(`should have content-type`, () => {
-      //   assert(res.headers[`content-type`] === `application/json; charset=utf-8`);
-      // });
-      //
-      // it(`should have content-length`, () => {
-      //   assert(res.headers[`content-length`]);
-      // });
-      //
-      // it(`should have answer with requested date`, () => {
-      //   assert(res.body.date === `123`);
-      // });
     });
 
   });
