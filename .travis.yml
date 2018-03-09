@@ -6,6 +6,8 @@ node_js:
 notifications:
   email: false
 
-services: mongodb
+services:
+  - mongodb
 
-before_install: npm run mongo
+before_install:
+  - npm run mongo
