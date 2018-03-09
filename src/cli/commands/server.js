@@ -1,4 +1,4 @@
-const {run} = require(`../server/server`);
+const {run} = require(`../../server/server`);
 
 /**
  * Запустить сервер с переданными параметрами

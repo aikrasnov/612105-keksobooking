@@ -1,4 +1,4 @@
-const {generateEntity} = require(`../src/generate-entity`);
+const {generateEntity} = require(`../src/offer-mock`);
 const {DATA} = require(`../src/constants`);
 const {expect} = require(`chai`);
 

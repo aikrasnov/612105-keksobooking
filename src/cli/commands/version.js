@@ -1,4 +1,4 @@
-const packageInfo = require(`../../package`);
+const packageInfo = require(`../../../package`);
 require(`colors`);
 
 const VERSION = packageInfo.version.split(`.`);

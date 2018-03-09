@@ -42,6 +42,11 @@ const validator = (scheme) => {
 
       }
 
+      // пытаемся привести к правильному типу для форм, там все строки :(
+      if (field.type === `number` && !isNaN(Number(property))) {
+        property = Number(property);
+      }
+
       // проверяем тип поля
       if (field.type && typeof property !== field.type) {
 

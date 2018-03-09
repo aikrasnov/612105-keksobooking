@@ -12,8 +12,9 @@
   },
   "scripts": {
     "test:lint": "eslint .",
-    "test:mocha": "mocha --recursive",
-    "test": "npm run test:lint && npm run test:mocha"
+    "test:mocha": "mocha --recursive  --exit --timeout 15000",
+    "test": "npm run test:lint && npm run test:mocha",
+    "mongo": "mongod --port 27017 --dbpath=./db"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,8 @@
   "homepage": "https://github.com/aikrasnov/612105-keksobooking#readme",
   "dependencies": {
     "colors": "1.1.2",
-    "express": "4.16.2"
+    "express": "4.16.2",
+    "mongodb": "3.0.3",
+    "multer": "1.3.0"
   }
 }

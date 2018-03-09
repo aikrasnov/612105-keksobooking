@@ -18,82 +18,25 @@ const DATA = {
 
 const PROHIBITED = /=/;
 
-const INVALID_DATA = {
-  "author": {
-    "avatar": ``
-  },
-  "offer": {
-    "title": `longlonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglong`,
-    "address": 1,
-    "price": -1000,
-    "type": ``,
-    "rooms": 9999,
-    "guests": ``,
-    "checkin": ``,
-    "checkout": `19:00`},
-  "location": {
-    "x": ``,
-    "y": ``
-  },
-  "date": ``
-};
-
 const VALIDATE_ERRORS = [
-  {
-    "error": `Validation Error`,
-    "fieldName": `avatar`,
-    "errorMessages": `'avatar' should have minimum length '21'`
-  },
-  {
-    "error": `Validation Error`,
-    "fieldName": `title`,
-    "errorMessages": `'title' should have maximum length '140'`
-  },
-  {
-    "error": `Validation Error`,
-    "fieldName": `address`,
-    "errorMessages": `'address' should have type 'string'`
-  },
-  {
-    "error": `Validation Error`,
-    "fieldName": `type`,
-    "errorMessages": `'' should be one of 'flat,palace,house,bungalo'`
-  },
-  {
-    "error": `Validation Error`,
-    "fieldName": `price`,
-    "errorMessages": `'-1000' should have minimum value '1'`
-  },
-  {
-    "error": `Validation Error`,
-    "fieldName": `checkin`,
-    "errorMessages": `'' should be one of '12:00,13:00,14:00'`
-  },
-  {
-    "error": `Validation Error`,
-    "fieldName": `checkout`,
-    "errorMessages": `'19:00' should be one of '12:00,13:00,14:00'`
-  },
-  {
-    "error": `Validation Error`,
-    "fieldName": `rooms`,
-    "errorMessages": `'9999' should have maximum value '1000'`
-  },
-  {
-    "error": `Validation Error`,
-    "fieldName": `x`,
-    "errorMessages": `'x' should have type 'number'`
-  },
-  {
-    "error": `Validation Error`,
-    "fieldName": `y`,
-    "errorMessages": `'y' should have type 'number'`
-  },
-  {
-    "error": `Validation Error`,
-    "fieldName": `date`,
-    "errorMessages": `'date' should have minimum length '13'`
-  }
+  {error: `Validation Error`,
+    fieldName: `title`,
+    errorMessages: `'title' should have minimum length '30'`},
+  {error: `Validation Error`,
+    fieldName: `address`,
+    errorMessages: `'address' should have minimum length '6'`},
+  {error: `Validation Error`,
+    fieldName: `type`,
+    errorMessages: `'bungalo1' should be one of 'flat,palace,house,bungalo'`},
+  {error: `Validation Error`,
+    fieldName: `price`,
+    errorMessages: `'0' should have minimum value '1'`},
+  {error: `Validation Error`,
+    fieldName: `checkin`,
+    errorMessages: `'12:001' should be one of '12:00,13:00,14:00'`},
+  {error: `Validation Error`,
+    fieldName: `checkout`,
+    errorMessages: `'12:010' should be one of '12:00,13:00,14:00'`}
 ];
 
 const ERROR_MESSAGE = [
@@ -106,7 +49,6 @@ const ERROR_MESSAGE = [
 module.exports = {
   VALIDATE_ERRORS,
   ERROR_MESSAGE,
-  INVALID_DATA,
   FILE_TYPES,
   PROHIBITED,
   DATA

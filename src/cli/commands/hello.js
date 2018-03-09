@@ -1,5 +1,5 @@
-const {generateEntity} = require(`../generate-entity`);
-const {askQuestion, repeatQuestion, writeFile, exists} = require(`../utils`);
+const {generateEntity} = require(`../../offer-mock`);
+const {askQuestion, repeatQuestion, writeFile, exists} = require(`../../utils`);
 const readline = require(`readline`);
 require(`colors`);
 

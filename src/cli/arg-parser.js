@@ -1,4 +1,4 @@
-const {PROHIBITED} = require(`./constants`);
+const {PROHIBITED} = require(`../constants`);
 
 /**
  * Распарсить команды из process.argv
