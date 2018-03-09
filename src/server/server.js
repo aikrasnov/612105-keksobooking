@@ -2,7 +2,6 @@ const express = require(`express`);
 const bodyParser = require(`body-parser`);
 const {changeOffersDatabase, offersRoute} = require(`./routes/offers/offers-route`);
 const {ValidateException} = require(`./exceptions/validate-exception`);
-const {OfferAlreadyExistsError} = require(`./exceptions/offer-already-exists`);
 const {ERROR_MESSAGE} = require(`../constants`);
 
 const create = () => {
@@ -15,8 +14,6 @@ const create = () => {
   app.use((err, req, res, _next) => {
     if (err instanceof ValidateException) {
       return res.status(err.statusCode).json(err.errors);
-    } else if (err instanceof OfferAlreadyExistsError) {
-      return res.status(err.statusCode).json({error: `Duplicate Error`, fieldName: `offer`, message: err.message});
     } else {
       console.error(err);
       return res.status(500).json(ERROR_MESSAGE);
