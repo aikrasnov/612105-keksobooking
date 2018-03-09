@@ -26,7 +26,8 @@ describe(`tests for offer route (only GET)`, () => {
           .field(`checkin`, `12:00`)
           .field(`checkout`, `12:00`)
           .field(`rooms`, 1)
-          .field(`date`, 123);
+          .field(`date`, 123)
+          .attach(`avatar`, `test/server/images/avatar`);
 
       assert(res.statusCode === 200);
     });
@@ -84,6 +85,34 @@ describe(`tests for offer route (only GET)`, () => {
       });
 
     });
+  });
+
+  describe(`GET /api/offers/:date/avatar`, () => {
+
+    describe(`avatar exist`, () => {
+
+      let res;
+
+      it(`should have answer`, async () => {
+        res = await request(app).get(`/api/offers/123/avatar`);
+
+        console.log(res);
+        assert(res.statusCode === 200);
+      });
+      //
+      // it(`should have content-type`, () => {
+      //   assert(res.headers[`content-type`] === `application/json; charset=utf-8`);
+      // });
+      //
+      // it(`should have content-length`, () => {
+      //   assert(res.headers[`content-length`]);
+      // });
+      //
+      // it(`should have answer with requested date`, () => {
+      //   assert(res.body.date === `123`);
+      // });
+    });
+
   });
 });
 

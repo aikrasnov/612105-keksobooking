@@ -4,36 +4,43 @@ const OFFERS_SCHEME = [
   {
     name: `title`,
     type: `string`,
+    required: true,
     minLength: 30,
     maxLength: 140
   },
   {
     name: `address`,
     type: `string`,
+    required: true,
     minLength: 6,
     maxLength: 100
   },
   {
     name: `type`,
+    required: true,
     enum: DATA.TYPES
   },
   {
     name: `price`,
     type: `number`,
+    required: true,
     minimum: 1,
     maximum: 100000
   },
   {
     name: `checkin`,
+    required: true,
     enum: DATA.CHECKINS
   },
   {
     name: `checkout`,
+    required: true,
     enum: DATA.CHECKOUTS
   },
   {
     name: `rooms`,
     type: `number`,
+    required: true,
     minimum: 0,
     maximum: 1000
   },
