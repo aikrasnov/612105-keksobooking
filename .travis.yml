@@ -8,6 +8,3 @@ notifications:
 
 services:
   - mongodb
-
-before_install:
-  - mkdir ./db && npm run mongo
