@@ -6,6 +6,7 @@ const {Router} = require(`express`);
 const {asyncHandler} = require(`../../util`);
 const multer = require(`multer`);
 const {Duplex} = require(`stream`);
+const {normalizeOffer} = require(`./normalize-offer`);
 
 const offersRoute = new Router();
 const upload = multer({storage: multer.memoryStorage()});
@@ -20,18 +21,27 @@ offersRoute.get(`/offers`, asyncHandler(async (req, res) => {
 
 offersRoute.post(`/offers`, upload.single(`avatar`), validator(OFFERS_SCHEME), asyncHandler(async (req, res) => {
 
-  const result = await offersCollection.collection.insert(req.body);
+  const answer = normalizeOffer(req.body);
+  const result = await offersCollection.collection.insert(answer);
   const avatarId = result.ops[0]._id;
 
   const avatar = req.file;
+
   if (avatar) {
+    answer.author = {};
+    answer.author.avatar = avatarId;
     const writableStream = await imageBacket.backet.openUploadStream(avatarId);
     const stream = new Duplex();
     stream.push(avatar.buffer);
     stream.push(null);
+    stream.on(`end`, async () => {
+      await offersCollection.collection.update({_id: avatarId}, {$set: {author: answer.author}});
+      res.send(answer);
+    });
     stream.pipe(writableStream);
+  } else {
+    res.send(answer);
   }
-  res.send(req.body);
 }));
 
 offersRoute.get(`/offers/:date`, asyncHandler(async (req, res) => {
