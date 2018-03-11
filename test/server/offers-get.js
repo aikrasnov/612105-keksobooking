@@ -2,6 +2,7 @@
 const request = require(`supertest`);
 const {assert} = require(`chai`);
 const {create} = require(`../../src/server/server`);
+const {DATABASE_TEST} = require(`../../environments`);
 
 let app;
 let changeOffersDatabase;
@@ -10,7 +11,7 @@ describe(`tests for offer route (only GET)`, () => {
 
   before(() => {
     ({app, changeOffersDatabase} = create());
-    return changeOffersDatabase(`test`);
+    return changeOffersDatabase(DATABASE_TEST);
   });
 
   const date = Date.now();
@@ -78,7 +79,7 @@ describe(`tests for offer route (only GET)`, () => {
       });
 
       it(`should have answer with requested date`, () => {
-        assert((res.body.date) === String(date));
+        assert((res.body.date) === Number(date));
       });
     });
 

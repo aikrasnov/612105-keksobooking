@@ -15,13 +15,20 @@ offersRoute.get(`/offers`, asyncHandler(async (req, res) => {
 
   const limit = Number(req.query.limit) || 20;
   const skip = Number(req.query.skip) || 0;
+  const offers = await offersCollection.collection.find().skip(skip).limit(limit).toArray();
 
-  res.send((await offersCollection.collection.find().skip(skip).limit(limit).toArray()));
+  res.send({
+    data: offers,
+    skip,
+    limit,
+    total: offers.length // не забыть поправить
+  });
 }));
 
 offersRoute.post(`/offers`, upload.single(`avatar`), validator(OFFERS_SCHEME), asyncHandler(async (req, res) => {
 
   const answer = normalizeOffer(req.body);
+  answer.date = Number(req.body.date) || Date.now();
   const result = await offersCollection.collection.insert(answer);
   const avatarId = result.ops[0]._id;
 
@@ -29,7 +36,7 @@ offersRoute.post(`/offers`, upload.single(`avatar`), validator(OFFERS_SCHEME), a
 
   if (avatar) {
     answer.author = {};
-    answer.author.avatar = avatarId;
+    answer.author.avatar = `/api/offers/${answer.date}/avatar`;
     const writableStream = await imageBacket.backet.openUploadStream(avatarId);
     const stream = new Duplex();
     stream.push(avatar.buffer);
@@ -47,7 +54,7 @@ offersRoute.post(`/offers`, upload.single(`avatar`), validator(OFFERS_SCHEME), a
 offersRoute.get(`/offers/:date`, asyncHandler(async (req, res) => {
   const {date} = req.params;
 
-  let [entity] = await offersCollection.collection.find({date}).toArray();
+  let [entity] = await offersCollection.collection.find({date: Number(date)}).toArray();
   if (entity) {
     res.send(entity);
     return;
@@ -59,7 +66,7 @@ offersRoute.get(`/offers/:date`, asyncHandler(async (req, res) => {
 offersRoute.get(`/offers/:date/avatar`, asyncHandler(async (req, res) => {
   const {date} = req.params;
 
-  let [entity] = await offersCollection.collection.find({date}).toArray();
+  let [entity] = await offersCollection.collection.find({date: Number(date)}).toArray();
   if (!entity) {
     res.status(400).send({error: `Bad Request`, errorMessages: `offer with date "${date}" not exist`});
     return;

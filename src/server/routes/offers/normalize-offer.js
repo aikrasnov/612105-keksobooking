@@ -7,7 +7,7 @@ const normalizeOffer = (income) => {
     address: String(income.address),
     price: Number(income.price),
     type: String(income.type),
-    rooms: String(income.guests),
+    rooms: Number(income.rooms),
     checkin: String(income.checkin),
     checkout: String(income.checkout)
   };
@@ -24,12 +24,6 @@ const normalizeOffer = (income) => {
     outcome.offer.photos = income.photos;
   }
 
-  if (typeof income.x === `number` && typeof income.y === `number`) {
-    outcome.location = {};
-    outcome.location.x = income.x;
-    outcome.location.y = income.y;
-  }
-
   if (typeof income.date !== `undefined`) {
     outcome.date = income.date;
   }
@@ -39,12 +33,25 @@ const normalizeOffer = (income) => {
     outcome.author.name = income.name;
   }
 
+  if (typeof income.guests !== `undefined`) {
+    outcome.offer.guests = Number(income.guests);
+  }
+
   if (typeof income.avatar !== `undefined`) {
     if (typeof outcome.author !== `object`) {
       outcome.author = {};
     }
 
     outcome.author.avatar = income.avatar;
+  }
+
+  if (income.address.match(/^\d+, \d+$/)) {
+    const address = income.address.replace(/\s/g, ``).match(/\d+/g);
+    if (address[0] && address[1]) {
+      outcome.location = {};
+      outcome.location.x = Number(address[0]);
+      outcome.location.y = Number(address[1]);
+    }
   }
 
   return outcome;

@@ -1,4 +1,6 @@
 const {Adapter} = require(`./adapter`);
+const {logger} = require(`../logger`);
+const {DB_HOST, AVATARS_BACKET, DATABASE_PROD} = require(`../../environments`);
 
 class ImageBacket extends Adapter {
   constructor() {
@@ -6,22 +8,22 @@ class ImageBacket extends Adapter {
   }
 
   async setupImages(database) {
-    await this.setup(`mongodb://localhost:27017`, database);
+    await this.setup(DB_HOST, database);
     this.backet = new this.GridBacket(this.db, {
       chunkSizeBytes: 1024 * 1024,
-      bucket: `avatars`
+      bucket: AVATARS_BACKET
     });
   }
 }
 
 let imageBacket = new ImageBacket();
-imageBacket.setupImages(`keksbooking`)
+imageBacket.setupImages(DATABASE_PROD)
     .then(() => {
-      console.log(`Image backet is OK!`);
+      logger.info(`Image backet is OK!`);
     })
     .catch((err) => {
-      console.error(`Can't setup image backet!`);
-      console.error(err);
+      logger.error(`Can't setup image backet!`);
+      logger.error(err);
       process.exit(1);
     });
 

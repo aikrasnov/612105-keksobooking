@@ -2,6 +2,7 @@ const request = require(`supertest`);
 const {assert} = require(`chai`);
 const {create} = require(`../../src/server/server`);
 const {VALIDATE_ERRORS} = require(`../../src/constants`);
+const {DATABASE_TEST} = require(`../../environments`);
 
 let app;
 let changeOffersDatabase;
@@ -10,7 +11,7 @@ describe(`tests for offer route (only POST)`, () => {
 
   before(() => {
     ({app, changeOffersDatabase} = create());
-    return changeOffersDatabase(`test`);
+    return changeOffersDatabase(DATABASE_TEST);
   });
 
   describe(`POST /api/offers`, () => {

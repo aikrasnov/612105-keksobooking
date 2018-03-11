@@ -1,4 +1,6 @@
 const {Adapter} = require(`./adapter`);
+const {logger} = require(`../logger`);
+const {DB_HOST, OFFERS_COLLECTION, DATABASE_PROD} = require(`../../environments`);
 
 class OffersCollection extends Adapter {
   constructor() {
@@ -6,18 +8,18 @@ class OffersCollection extends Adapter {
   }
 
   async setupOffers(database) {
-    await this.setup(`mongodb://localhost:27017`, database, `offers`);
+    await this.setup(DB_HOST, database, OFFERS_COLLECTION);
   }
 }
 
 let offersCollection = new OffersCollection();
-offersCollection.setupOffers(`keksbooking`)
+offersCollection.setupOffers(DATABASE_PROD)
     .then(() => {
-      console.log(`Offers collection is OK!`);
+      logger.info(`Offers collection is OK!`);
     })
     .catch((err) => {
-      console.error(`Can't setup offers collection!`);
-      console.error(err);
+      logger.error(`Can't setup offers collection!`);
+      logger.error(err);
       process.exit(1);
     });
 

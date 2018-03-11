@@ -1,4 +1,5 @@
 const {run} = require(`../../server/server`);
+const {SERVER_PORT} = require(`../../../environments`);
 
 /**
  * Запустить сервер с переданными параметрами
@@ -6,7 +7,7 @@ const {run} = require(`../../server/server`);
  */
 const runServer = (server) => {
 
-  let port = server.value || `3000`;
+  let port = server.value || SERVER_PORT;
   run(port);
 
 };
