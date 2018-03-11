@@ -35,7 +35,6 @@ offersRoute.post(`/offers`, upload.single(`avatar`), validator(OFFERS_SCHEME), a
   const avatar = req.file;
 
   if (avatar) {
-    answer.author = {};
     answer.author.avatar = `/api/offers/${answer.date}/avatar`;
     const writableStream = await imageBacket.backet.openUploadStream(avatarId);
     const stream = new Duplex();
