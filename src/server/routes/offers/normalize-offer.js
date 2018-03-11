@@ -28,13 +28,17 @@ const normalizeOffer = (income) => {
     outcome.date = income.date;
   }
 
+  outcome.author = {};
   if (typeof income.name !== `undefined`) {
-    outcome.author = {};
     outcome.author.name = income.name;
+  } else {
+    outcome.author.name = [`Keks`, `Pavel`, `Nikolay`, `Alex`, `Ulyana`, `Anastasyia`, `Julia`][Math.floor(Math.random() * 7)];
   }
 
-  if (typeof income.guests !== `undefined`) {
+  if (typeof income.guests !== `undefined` && !isNaN(Number(income.guests))) {
     outcome.offer.guests = Number(income.guests);
+  } else {
+    outcome.offer.guests = 0;
   }
 
   if (typeof income.avatar !== `undefined`) {
@@ -43,6 +47,18 @@ const normalizeOffer = (income) => {
     }
 
     outcome.author.avatar = income.avatar;
+  }
+
+  if (!Array.isArray(income.photos)) {
+    outcome.offer.photos = [];
+  } else {
+    outcome.offer.photos = income.photos;
+  }
+
+  if (!Array.isArray(income.features)) {
+    outcome.offer.features = [];
+  } else {
+    outcome.offer.features = income.features;
   }
 
   if (income.address.match(/^\d+, \d+$/)) {
