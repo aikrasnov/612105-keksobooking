@@ -7,7 +7,7 @@ const {SERVER_PORT} = require(`../../../environments`);
  */
 const runServer = (server) => {
 
-  let port = server.value || SERVER_PORT;
+  const port = server.value || SERVER_PORT;
   run(port);
 
 };

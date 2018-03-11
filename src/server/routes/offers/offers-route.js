@@ -53,7 +53,7 @@ offersRoute.post(`/offers`, upload.single(`avatar`), validator(OFFERS_SCHEME), a
 offersRoute.get(`/offers/:date`, asyncHandler(async (req, res) => {
   const {date} = req.params;
 
-  let [entity] = await offersCollection.collection.find({date: Number(date)}).toArray();
+  const [entity] = await offersCollection.collection.find({date: Number(date)}).toArray();
   if (entity) {
     res.send(entity);
     return;
@@ -65,7 +65,7 @@ offersRoute.get(`/offers/:date`, asyncHandler(async (req, res) => {
 offersRoute.get(`/offers/:date/avatar`, asyncHandler(async (req, res) => {
   const {date} = req.params;
 
-  let [entity] = await offersCollection.collection.find({date: Number(date)}).toArray();
+  const [entity] = await offersCollection.collection.find({date: Number(date)}).toArray();
   if (!entity) {
     res.status(400).send({error: `Bad Request`, errorMessages: `offer with date "${date}" not exist`});
     return;

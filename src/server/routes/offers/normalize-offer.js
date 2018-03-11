@@ -1,3 +1,5 @@
+const {DATA} = require(`../../../constants`);
+
 const normalizeOffer = (income) => {
 
   const outcome = {};
@@ -32,7 +34,7 @@ const normalizeOffer = (income) => {
   if (typeof income.name !== `undefined`) {
     outcome.author.name = income.name;
   } else {
-    outcome.author.name = [`Keks`, `Pavel`, `Nikolay`, `Alex`, `Ulyana`, `Anastasyia`, `Julia`][Math.floor(Math.random() * 7)];
+    outcome.author.name = DATA.NAMES[Math.floor(Math.random() * DATA.NAMES.length)];
   }
 
   if (typeof income.guests !== `undefined` && !isNaN(Number(income.guests))) {

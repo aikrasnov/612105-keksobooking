@@ -1,7 +1,7 @@
 require(`colors`);
 const fs = require(`fs`);
 const {promisify} = require(`util`);
-
+const {ALPHABET} = require(`./constants`);
 
 const writeFile = promisify(fs.writeFile);
 const readFile = promisify(fs.readFile);
@@ -24,9 +24,8 @@ const randomNumber = (min, max) => {
  */
 const randomString = (length) => {
   let text = ``;
-  let alphabet = `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789`;
   for (let i = 0; i < length; i++) {
-    text += alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+    text += ALPHABET.charAt(Math.floor(Math.random() * ALPHABET.length));
   }
   return text;
 };
@@ -53,7 +52,7 @@ const askQuestion = (rl, query) => {
  * @return {Promise<*>}
  */
 const repeatQuestion = async (rl, question, message, checkFunction) => {
-  let answer = await askQuestion(rl, question);
+  const answer = await askQuestion(rl, question);
 
   if (typeof checkFunction !== `function`) {
     throw new Error(`last arg must be a function!`);

@@ -26,20 +26,18 @@ const validator = (scheme) => {
 
 
       // Проверяем обязательность поля
-      if (typeof property === `undefined` && field.required) {
-        errors.push({
-          error: `Validation Error`,
-          fieldName: field.name,
-          errorMessages: `is required`
-        });
+      if (typeof property === `undefined`) {
 
-        // если поля нет, то и проверять больше нечего
+        if (field.reqired) {
+          errors.push({
+            error: `Validation Error`,
+            fieldName: field.name,
+            errorMessages: `is required`
+          });
+        }
+
+        // если поле не существует проверять нечего
         return errors;
-
-        // если поля нет, и оно не обязательное просто выходим
-      } else if (typeof property === `undefined`) {
-        return errors;
-
       }
 
       // пытаемся привести к правильному типу для форм, там все строки :(
@@ -231,11 +229,10 @@ const validator = (scheme) => {
               fieldName: field.name,
               errorMessages: `'${el}' from [${property}] should be one of [${field.eachOneOf}]`
             });
+
+            return errors;
           }
         }
-
-        return errors;
-
       }
 
       if (field.properties) {
@@ -254,9 +251,8 @@ const validator = (scheme) => {
 
     if (errors.length > 0) {
       throw new ValidateException(`request is incorrect`, errors);
-    } else {
-      return next();
     }
+    return next();
   };
 };
 

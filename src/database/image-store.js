@@ -16,7 +16,7 @@ class ImageBacket extends Adapter {
   }
 }
 
-let imageBacket = new ImageBacket();
+const imageBacket = new ImageBacket();
 imageBacket.setupImages(DATABASE_PROD)
     .then(() => {
       logger.info(`Image backet is OK!`);

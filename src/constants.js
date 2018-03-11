@@ -1,3 +1,5 @@
+const ALPHABET = `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789`;
+
 const FILE_TYPES = {
   'css': `text/css`,
   'html': `text/html; charset=UTF-8`,
@@ -47,6 +49,7 @@ const ERROR_MESSAGE = [
 ];
 
 module.exports = {
+  ALPHABET,
   VALIDATE_ERRORS,
   ERROR_MESSAGE,
   FILE_TYPES,

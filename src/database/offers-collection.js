@@ -12,7 +12,7 @@ class OffersCollection extends Adapter {
   }
 }
 
-let offersCollection = new OffersCollection();
+const offersCollection = new OffersCollection();
 offersCollection.setupOffers(DATABASE_PROD)
     .then(() => {
       logger.info(`Offers collection is OK!`);

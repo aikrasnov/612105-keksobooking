@@ -20,10 +20,10 @@ const create = () => {
   app.use((err, req, res, _next) => {
     if (err instanceof ValidateException) {
       return res.status(err.statusCode).json(err.errors);
-    } else {
-      logger.error(err);
-      return res.status(500).json(ERROR_MESSAGE);
     }
+
+    logger.error(err);
+    return res.status(500).json(ERROR_MESSAGE);
   });
 
   return {app, changeOffersDatabase};
