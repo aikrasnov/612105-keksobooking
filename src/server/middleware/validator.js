@@ -28,7 +28,7 @@ const validator = (scheme) => {
       // Проверяем обязательность поля
       if (typeof property === `undefined`) {
 
-        if (field.reqired) {
+        if (field.required) {
           errors.push({
             error: `Validation Error`,
             fieldName: field.name,
